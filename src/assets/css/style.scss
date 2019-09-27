@@ -1,0 +1,175 @@
+/* =============================================================================
+   Inicializações
+============================================================================= */
+
+/* =========================================================
+   Geral
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #eff1fd;
+  font-family: sans-serif;
+  color: #333;
+}
+
+/* =========================================================
+   Table
+========================================================= */
+
+table {
+  width: 100%;
+}
+
+tr + tr {
+  border-top: 0.1rem solid #f2f2f2;
+}
+
+th,
+td {
+  padding: 0.8rem 0;
+}
+
+th {
+  text-align: left;
+  font-weight: bold;
+}
+
+td {
+  width: 78%;
+}
+
+td + td {
+  width: 22%;
+}
+
+/* =============================================================================
+   Estilos
+============================================================================= */
+
+/* =========================================================
+   Wrapper para centralizar e extender a linha à esquerda
+   até o fundo do section.purchase-list
+========================================================= */
+
+.wrapper {
+  display: flex;
+  max-width: 36rem;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2rem 2rem 0;
+}
+
+/* =========================================================
+   PurchaseList component
+========================================================= */
+
+.purchase-list {
+  flex-grow: 1;
+  padding: 6rem 0 2rem 2.4rem;
+  margin-left: 1rem;
+  border-left: 0.1rem solid #d6d9e0;
+}
+
+/* =========================================================
+   PurchaseItem component
+========================================================= */
+
+.purchase-item {
+  position: relative;
+}
+
+.purchase-item::before {
+  content: "";
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
+  position: absolute;
+  top: 0.8rem;
+  left: -0.6rem;
+  box-shadow: -0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  transform: rotate(45deg);
+}
+
+.purchase-item__container {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.purchase-item + .purchase-item {
+  margin-top: 2rem;
+}
+
+.purchase-item__meta {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem 0.6rem;
+  background-color: #fff;
+}
+.purchase-item__item {
+  display: flex;
+  align-items: center;
+}
+
+.purchase-item__icon {
+  width: 0.8rem;
+  margin-right: 0.4rem;
+}
+
+.purchase-item__products {
+  background-color: #f8f8f8;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+}
+
+.purchase-item__check {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: 0.4rem;
+  left: -3.4rem;
+}
+
+/* =============================================================================
+   Media queries
+============================================================================= */
+
+@media screen and (max-width: 579px) {
+  html {
+    font-size: 14px;
+  }
+
+  .purchase-item__meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+  }
+}
+
+/* =============================================================================
+   Transições do React Transition Group
+============================================================================= */
+
+.fade-appear,
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-appear.fade-appear-active,
+.fade-enter.fade-enter-appear {
+  opacity: 1;
+  transition: opacity 400ms;
+}
