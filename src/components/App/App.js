@@ -17,6 +17,7 @@ class App extends React.Component {
       purchases: [],
       // Assume true caso ocorra caso um erro no consumo do endpoint
       error: false,
+      // Assume true caso a timeline não tenha nenhuma compra
       empty: false
     };
   }
@@ -118,8 +119,10 @@ class App extends React.Component {
   componentDidMount() {
     axios
       .get("https://storage.googleapis.com/dito-questions/events.json")
-      // Chama a função de manipulação de dados
       .then(res => {
+        // Checa se existem compras
+        // Se existem, chama a função de manipulação
+        // Senão, define o state como vazio
         res.data.events.length
           ? this.setPurchases(res.data.events)
           : this.setState({ empty: true });
@@ -133,8 +136,11 @@ class App extends React.Component {
 
   // Renderização
   render() {
+    // Conterá o conteúdo que será renderizado
     let output = "";
 
+    // Verifica se ocorreu um erro, se a timeline está vazia ou não,
+    // e atribui ao ouput o conteúdo correto
     if (this.state.error) output = <p>Erro ao carregar timeline de compras</p>;
     if (this.state.empty) output = <p>Nenhuma compra encontrada</p>;
     if (this.state.purchases.length)
