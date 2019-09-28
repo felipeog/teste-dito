@@ -1,7 +1,6 @@
 import React from "react";
 import moment from "moment";
 import axios from "axios";
-import { CSSTransition } from "react-transition-group";
 import PurchaseList from "../PurchaseList/PurchaseList";
 
 /* App
@@ -17,7 +16,8 @@ class App extends React.Component {
       // Conterá os eventos após manipulação
       purchases: [],
       // Assume true caso ocorra caso um erro no consumo do endpoint
-      error: false
+      error: false,
+      empty: false
     };
   }
 
@@ -119,7 +119,11 @@ class App extends React.Component {
     axios
       .get("https://storage.googleapis.com/dito-questions/events.json")
       // Chama a função de manipulação de dados
-      .then(res => this.setPurchases(res.data.events))
+      .then(res => {
+        res.data.events.length
+          ? this.setPurchases(res.data.events)
+          : this.setState({ empty: true });
+      })
       .catch(err => {
         console.error(err);
         // Define o state caso ocorra um erro
@@ -129,22 +133,14 @@ class App extends React.Component {
 
   // Renderização
   render() {
-    return (
-      <div className="wrapper">
-        {this.state.error ? ( // Mostra uma mensagem de erro caso ocorra um erro no consumo do endpoint
-          <p>Erro ao carregar timeline de compras</p>
-        ) : (
-          <CSSTransition
-            in={true}
-            appear={true}
-            timeout={400}
-            classNames="fade"
-          >
-            <PurchaseList purchases={this.state.purchases} />
-          </CSSTransition>
-        )}
-      </div>
-    );
+    let output = "";
+
+    if (this.state.error) output = <p>Erro ao carregar timeline de compras</p>;
+    if (this.state.empty) output = <p>Nenhuma compra encontrada</p>;
+    if (this.state.purchases.length)
+      output = <PurchaseList purchases={this.state.purchases} />;
+
+    return <div className="wrapper">{output}</div>;
   }
 }
 
