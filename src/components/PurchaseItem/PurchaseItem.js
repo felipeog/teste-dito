@@ -1,7 +1,11 @@
 import React from "react";
 import ProductList from "../ProductList/ProductList";
 
-import icons from "../../assets/icons";
+import { ReactComponent as Calendar } from "../../assets/icons/calendar.svg";
+import { ReactComponent as Check } from "../../assets/icons/check.svg";
+import { ReactComponent as Clock } from "../../assets/icons/clock.svg";
+import { ReactComponent as Money } from "../../assets/icons/money.svg";
+import { ReactComponent as Place } from "../../assets/icons/place.svg";
 
 /* PurchaseItem
 Exibe os dados de uma compra.
@@ -16,31 +20,19 @@ const PurchaseItem = props => {
         <header>
           <ul className="purchase-item__meta">
             <li className="purchase-item__item">
-              <div
-                className="purchase-item__icon"
-                dangerouslySetInnerHTML={{ __html: icons.calendar }}
-              />
+              <Calendar className="purchase-item__icon" />
               {date}
             </li>
             <li className="purchase-item__item">
-              <div
-                className="purchase-item__icon"
-                dangerouslySetInnerHTML={{ __html: icons.clock }}
-              />
+              <Clock className="purchase-item__icon" />
               {time}
             </li>
             <li className="purchase-item__item">
-              <div
-                className="purchase-item__icon"
-                dangerouslySetInnerHTML={{ __html: icons.place }}
-              />
+              <Place className="purchase-item__icon" />
               {storeName}
             </li>
             <li className="purchase-item__item">
-              <div
-                className="purchase-item__icon"
-                dangerouslySetInnerHTML={{ __html: icons.money }}
-              />
+              <Money className="purchase-item__icon" />
               {revenue}
             </li>
           </ul>
@@ -50,10 +42,7 @@ const PurchaseItem = props => {
           {<ProductList products={products} />}
         </div>
 
-        <div
-          className="purchase-item__check"
-          dangerouslySetInnerHTML={{ __html: icons.check }}
-        />
+        <Check className="purchase-item__check" />
       </div>
     </article>
   );
